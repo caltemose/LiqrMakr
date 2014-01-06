@@ -18,8 +18,6 @@ set :markdown, :tables => true, :autolink => true, :fenced_code_blocks => true
 # turn off SASS line comments
 ::Compass.configuration.sass_options = { :line_comments => false }
 
-page '/', :layout => false
-
 activate :livereload
 activate :directory_indexes
 
@@ -28,12 +26,14 @@ configure :build do
   activate :relative_assets
   activate :minify_css
   activate :minify_javascript
+  # activate :asset_hash #cachebuster
 end
 
 # Deploy config
-activate :deploy do |deploy|
-  deploy.method = :rsync
-  deploy.user = "chadzilla"
-  deploy.host = "chadzilla.com"
-  deploy.path = "/home/chadzilla/projects.chadzilla.com/gardencal/"
-end
+# activate :deploy do |deploy|
+#   deploy.method = :rsync
+#   deploy.user = ""
+#   deploy.host = ""
+#   deploy.path = ""
+#   deploy.after_build = false
+# end

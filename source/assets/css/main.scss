@@ -1,0 +1,154 @@
+@import "reset";
+
+/* reset above, styles below */
+
+$maxWidthDesktop: 44em;
+$maxWidthDesktopRem: 44rem;
+$titleFont: Helvetica, Arial, sans-serif;
+$copyFont: Helvetica, Arial, sans-serif;
+$bgColor: #ddd;
+$typeColor: #000;
+$linkColor: #2577A1;
+$hoverColor: darken($linkColor, 20%);
+$footerFontSize: 0.7em;
+$codeFontColor: #B8FFBA;
+$codeContentColor: #E8DD83;
+$codeBgColor: #222; //darken($bgColor, 5%);
+//$footerBgColor: #
+
+body {
+	font-family: $copyFont;
+	margin: 1em;
+	background: $bgColor;
+	color: $typeColor;
+	line-height: 120%;
+}
+
+h1 {
+	font-size: 1.3em;
+	font-family: $titleFont;
+	font-weight: 700;
+	line-height: 105%;
+
+	> small {
+		display: block;
+		margin-top: 0.3em;
+		font-size: 0.7em;
+		font-family: $copyFont;
+		font-weight: normal;
+		color: transparentize($typeColor, 0.4);
+		line-height: 100%;
+	}
+
+	> a {
+		display: block;
+		margin: 0.3em 0 0;
+		font-size: 0.7em;
+	}
+}
+
+h2 {
+	margin-top: 1.5em;
+}
+
+h3 {
+	margin: 2em 0 0.5em;
+}
+
+h2 + h3 {
+	margin-top: 0;
+}
+
+p {
+	margin: 0.3em 0 0.5em;
+}
+
+a {
+	color: $linkColor;
+	text-decoration: none;
+
+	&:hover {
+		color: $hoverColor;
+	}
+}
+
+ol, ul {
+	width: 94%;
+	margin-left: 0;
+	padding-left: 12%;
+}
+
+li {
+	margin-bottom: 0.3em;
+}
+
+code {
+	padding: 0.1em;
+	background: lighten($bgColor, 4%); //$codeBgColor;
+	color: #0F520D; //$codeFontColor;
+	font-family: 'Monaco', 'Lucida Console', 'Andale Mono', FreeMono, 'Osaka Monospaced', Courier, monospace;
+	font-size: 0.9em;
+}
+
+pre {
+	background: $codeBgColor;
+	display: block;
+	padding: 0.4em;
+	overflow: hidden;
+	font-size: 0.8em;
+}
+
+pre > code {
+	color: $codeFontColor;
+	background: none;
+}
+
+pre .content {
+	color: $codeContentColor;
+}
+
+body > footer {
+	margin-top: 3em;
+	font-size: $footerFontSize;
+}
+
+/*
+--------------------------------------------------------
+media query for middle/portrait size range
+
+*/
+@media screen and (min-width: 30em) {
+
+	body { font-size: 19px; }
+
+}
+
+
+/*
+--------------------------------------------------------
+media query for larger devices
+
+*/
+@media screen and (min-width: $maxWidthDesktop) {
+	
+	body { font-size: 21px; }
+
+	body > section, body > footer {
+		width: 100%;
+		max-width: $maxWidthDesktopRem;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	h1 {
+		font-size: 2em;
+		small {
+			font-size: 0.6em;
+		}
+	}
+
+	ol, ul {
+		padding-left: 8%;
+	}
+
+}

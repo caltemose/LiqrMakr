@@ -6,4 +6,4 @@ keywords: meta keywords
 
 # Welcome
 
-Home page content.
+Some home page content.

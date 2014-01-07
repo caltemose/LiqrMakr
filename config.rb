@@ -12,6 +12,10 @@ set :layouts_dir, "layouts"
 set :layout, "default"
 #set :build_dir, "build"
 
+page 'index.html', :layout => false
+page 'recipes/limoncello.html', :layout => false
+
+
 # markdown options
 set :markdown, :tables => true, :autolink => true, :fenced_code_blocks => true
 
@@ -30,10 +34,10 @@ configure :build do
 end
 
 # Deploy config
-# activate :deploy do |deploy|
-#   deploy.method = :rsync
-#   deploy.user = ""
-#   deploy.host = ""
-#   deploy.path = ""
-#   deploy.after_build = false
-# end
+activate :deploy do |deploy|
+  deploy.method = :rsync
+  deploy.user = "chadzilla"
+  deploy.host = "chadzilla.com"
+  deploy.path = "/home/chadzilla/projects.chadzilla.com/liqrmakr/"
+  #deploy.clean = false
+end

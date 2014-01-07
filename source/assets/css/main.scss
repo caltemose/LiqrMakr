@@ -4,46 +4,41 @@
 
 $maxWidthDesktop: 44em;
 $maxWidthDesktopRem: 44rem;
-$titleFont: Helvetica, Arial, sans-serif;
+$titleFont: Georgia, serif;
 $copyFont: Helvetica, Arial, sans-serif;
-$bgColor: #ddd;
+$bgColor: #fffcc1;
 $typeColor: #000;
 $linkColor: #2577A1;
 $hoverColor: darken($linkColor, 20%);
 $footerFontSize: 0.7em;
-$codeFontColor: #B8FFBA;
-$codeContentColor: #E8DD83;
-$codeBgColor: #222; //darken($bgColor, 5%);
-//$footerBgColor: #
+
 
 body {
-	font-family: $copyFont;
-	margin: 1em;
+	margin: 0;
+	padding: 0;
 	background: $bgColor;
+	font-family: $copyFont;
 	color: $typeColor;
 	line-height: 120%;
 }
 
+main > section {
+	margin-bottom: 2em;
+}
+
 h1 {
-	font-size: 1.3em;
+	margin: 0;
+	padding: 0.2em 0;
+	background: #e7e173;
+	color: #0d3f09;
+	font-size: 0.9em;
 	font-family: $titleFont;
-	font-weight: 700;
-	line-height: 105%;
+	font-weight: 400;
+	text-align: center;
+	letter-spacing: 0.2em;
 
-	> small {
-		display: block;
-		margin-top: 0.3em;
-		font-size: 0.7em;
-		font-family: $copyFont;
-		font-weight: normal;
-		color: transparentize($typeColor, 0.4);
-		line-height: 100%;
-	}
-
-	> a {
-		display: block;
-		margin: 0.3em 0 0;
-		font-size: 0.7em;
+	& > a {
+		color: #0d3f09;
 	}
 }
 
@@ -82,31 +77,6 @@ li {
 	margin-bottom: 0.3em;
 }
 
-code {
-	padding: 0.1em;
-	background: lighten($bgColor, 4%); //$codeBgColor;
-	color: #0F520D; //$codeFontColor;
-	font-family: 'Monaco', 'Lucida Console', 'Andale Mono', FreeMono, 'Osaka Monospaced', Courier, monospace;
-	font-size: 0.9em;
-}
-
-pre {
-	background: $codeBgColor;
-	display: block;
-	padding: 0.4em;
-	overflow: hidden;
-	font-size: 0.8em;
-}
-
-pre > code {
-	color: $codeFontColor;
-	background: none;
-}
-
-pre .content {
-	color: $codeContentColor;
-}
-
 body > footer {
 	margin-top: 3em;
 	font-size: $footerFontSize;
@@ -133,18 +103,11 @@ media query for larger devices
 	
 	body { font-size: 21px; }
 
-	body > section, body > footer {
+	main > section {
 		width: 100%;
 		max-width: $maxWidthDesktopRem;
 		margin-left: auto;
 		margin-right: auto;
-	}
-
-	h1 {
-		font-size: 2em;
-		small {
-			font-size: 0.6em;
-		}
 	}
 
 	ol, ul {

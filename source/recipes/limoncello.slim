@@ -7,7 +7,7 @@ html
     meta name="description" content=""
     meta name="keywords" content=""
 
-    title Style Test
+    title LiqrMakr - How to Make Limoncello
 
     == stylesheet_link_tag "main"
 
@@ -23,24 +23,39 @@ html
         p This recipe is a great starter recipe into the process of making liquors because it's quick and can be extended to include many types of citrus. If you've spent time in Italy (or just know Italians) you'll know there are many recipes for limoncello (like everything else). I originally learned of this recipe from 'Many Beautiful Things', a story/recipe book by the actor Vincent Schiavelli, whose family is from Sicily. It's a great read.
 
       section.recipe
-        p This recipe will make 750ml of limoncello.
+        p 
+          | This recipe will make 
+          input(type="text" size="5" value="750") 
+          |  ml of limoncello.
 
         h2 1. Mix
         p Mix these ingredients and store in an airtight glass container.
         ul
-          li 300ml grain alcohol
-          li peeled skins from 3 meyer lemons
+          li 
+            input(type="text" size="5" value="300")  
+            |  ml grain alcohol
+          li 
+            | peeled skins from 
+            input(type="text" size="2" value="3") 
+            |  meyer lemons
 
         h2 2. Wait
-        p 4 days minimum. The peels turn white eventually which tells you there's no reason to macerate any longer.
+        p 
+          strong 4 
+          | days minimum. The peels turn white eventually which tells you there's no reason to macerate any longer.
 
         h2 3. Finish
         ul
           li 
             p Make simple syrup the day before you filter and bottle the alcohol. You'll need:
             ul
-              li 250ml water
-              li 120ml sugar
+              li 
+                strong 250ml
+                |  water
+              li 
+                strong 120ml
+                |  sugar
+
             p Heat the water, add the sugar and dissolve and let the syrup cool before adding to macerated alcohol.
 
           li Filter the macerated alcohol. In this case just remove the peels - filtering through a coffee filter is mostly a waste of time.

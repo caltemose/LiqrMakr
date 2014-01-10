@@ -21,12 +21,40 @@ var liqrmakr = (function($) {
     total.change(function(){ liqrmakr.updateVia('total'); });
     percent.change(function(){ liqrmakr.updateVia('percent'); });
     target.change(function(){ liqrmakr.updateVia('target'); });
+    alcohol.change(function(){ liqrmakr.updateAlcohol(); })
+    flavoring.change(function(){ liqrmakr.updateFlavoring(); })
   }
   function roundAmount(amt) {
     return Math.round(amt);
   }
   function isBad(value) {
     return value === '' || isNaN(value);
+  }
+  function updateAlcohol() {
+    var ratio, totalAmount, syrupToAdd, syrupCombined, sw, ss;
+    ratio = percent.val() / target.val();
+    totalAmount = roundAmount(ratio * alcohol.val());
+    total.val(totalAmount);
+    syrupToAdd = roundAmount(totalAmount - alcohol.val());
+    syrupCombined = syrupToAdd * 1.164;
+    sw = roundAmount(syrupCombined * 0.6135);
+    ss = roundAmount(syrupCombined - sw);
+    syrupWater.text(sw + "ml");
+    syrupSugar.text(ss + "ml");
+    flavoring.val(Math.ceil(alcohol.val()*0.01));
+  }
+  function updateFlavoring() {
+    var ratio, totalAmount, syrupToAdd, syrupCombined, sw, ss;
+    alcohol.val(flavoring.val() * 100);
+    ratio = percent.val() / target.val();
+    totalAmount = roundAmount(ratio * alcohol.val());
+    total.val(totalAmount);
+    syrupToAdd = roundAmount(totalAmount - alcohol.val());
+    syrupCombined = syrupToAdd * 1.164;
+    sw = roundAmount(syrupCombined * 0.6135);
+    ss = roundAmount(syrupCombined - sw);
+    syrupWater.text(sw + "ml");
+    syrupSugar.text(ss + "ml");
   }
   function update() {
     var grainAmount, syrupToAdd, syrupCombined, sw, ss;
@@ -38,31 +66,16 @@ var liqrmakr = (function($) {
     ss = roundAmount(syrupCombined - sw);
     syrupWater.text(sw + "ml");
     syrupSugar.text(ss + "ml");
+    flavoring.val(Math.ceil(grainAmount*0.01));
   }
   function updateVia(field, value) {
     update();
   }
-  function recalc() {
-    /*
-    if ( !isBad(flavored.val()) ) {
-      if ( !isBad(target.val()) && !isBad(percent.val()) ) {         
-        ratio = percent.val() / target.val();
-        totalAmount = ratio * flavored.val();
-        totalAmount = roundAmount(totalAmount);
-        syrupToAdd = totalAmount - flavored.val();  
-        syrupToAdd = roundAmount(syrupToAdd);
-        syrup.val(syrupToAdd);
-        total.val(totalAmount);
-        syrupCombined = syrupToAdd * 1.164;
-        syrupWater = syrupCombined * 0.6135;
-        syrupSugar = syrupCombined - syrupWater;
-        msg = "Mix " + roundAmount(syrupWater) +  " water with " + roundAmount(syrupSugar) + " sugar.";
-      }
-    */
-  }
   return {
     init: initialize,
-    updateVia: updateVia
+    updateVia: updateVia,
+    updateAlcohol: updateAlcohol,
+    updateFlavoring: updateFlavoring
   }
 })(Zepto);
 

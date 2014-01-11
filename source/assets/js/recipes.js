@@ -1,82 +1,89 @@
 var liqrmakr = (function($) {
-  var total, percent, target, alcohol, flavoring, syrupWater, syrupSugar;
+  var total, proof, target, percent, 
+      bottleCount, bottleSize, bottleLabel,
+      alcohol, flavoring, 
+      syrupWater, syrupSugar;
 
   function initialize(options) {
-    console.log('init liqrmakr');
     getInputs();
-    if (options.total) total.val(options.total);
     bindInputs();
-    update();
+    if (options.total) {
+      total.val(options.total);
+      update('total');
+    }
   }
+
   function getInputs() {
     total = $('#total');
-    percent = $('#percent');
+    proof = $('#proof');
     target = $('#target');
+    percent = $('#percent');
+    bottleCount = $('#bottleCount');
+    bottleSize = $('#bottleSize');
+    bottleLabel = $('#bottleLabel');
     alcohol = $('#alcohol');
     flavoring = $('#flavoring');
     syrupWater = $('#syrupWater');
     syrupSugar = $('#syrupSugar');
   }
+
   function bindInputs() {
-    total.change(function(){ liqrmakr.updateVia('total'); });
-    percent.change(function(){ liqrmakr.updateVia('percent'); });
-    target.change(function(){ liqrmakr.updateVia('target'); });
-    alcohol.change(function(){ liqrmakr.updateAlcohol(); })
-    flavoring.change(function(){ liqrmakr.updateFlavoring(); })
+    total.change(function(){ liqrmakr.update('total'); });
+    percent.change(function(){ liqrmakr.update('percent'); });
+    target.change(function(){ liqrmakr.update('target'); });
+    alcohol.change(function(){ liqrmakr.update('alcohol'); })
+    flavoring.change(function(){ liqrmakr.update('flavoring'); })
   }
+
+  function update(field) {
+    var grainAmount, ratio, totalAmount, syrupToAdd, syrupCombined, sw, ss, bottles;
+
+    if (field==="alcohol" || field==="flavoring") {
+      //update flavoring/alcohol values
+      if (field==="alcohol") flavoring.val(Math.ceil(alcohol.val()*0.01));
+      else alcohol.val(flavoring.val() * 100);
+      //update total amount
+      ratio = percent.val() / target.val();
+      totalAmount = roundAmount(ratio * alcohol.val());
+      total.val(totalAmount);
+    } else {
+      grainAmount = total.val() / (percent.val()/target.val());
+      //update alcohol amount
+      alcohol.val(roundAmount(grainAmount));
+      //update flavoring
+      flavoring.val(Math.ceil(grainAmount*0.01));
+      //update proof
+      proof.text(roundAmount(target.val()*2) + " ");
+    }
+
+    //update syrup information
+    syrupToAdd = total.val() - alcohol.val();
+    syrupCombined = syrupToAdd * 1.164;
+    sw = roundAmount(syrupCombined * 0.6135);
+    ss = roundAmount(syrupCombined - sw);
+    syrupWater.text(sw + "ml");
+    syrupSugar.text(ss + "ml");
+
+    //update bottle count 
+    bottles = total.val()/bottleSize.val();
+    bottleCount.val(bottles);
+    if (bottles >= 2) bottleLabel.text("ml containers");
+    else bottleLabel.text("ml container");
+  }
+
   function roundAmount(amt) {
     return Math.round(amt);
   }
+
   function isBad(value) {
     return value === '' || isNaN(value);
   }
-  function updateAlcohol() {
-    var ratio, totalAmount, syrupToAdd, syrupCombined, sw, ss;
-    ratio = percent.val() / target.val();
-    totalAmount = roundAmount(ratio * alcohol.val());
-    total.val(totalAmount);
-    syrupToAdd = roundAmount(totalAmount - alcohol.val());
-    syrupCombined = syrupToAdd * 1.164;
-    sw = roundAmount(syrupCombined * 0.6135);
-    ss = roundAmount(syrupCombined - sw);
-    syrupWater.text(sw + "ml");
-    syrupSugar.text(ss + "ml");
-    flavoring.val(Math.ceil(alcohol.val()*0.01));
-  }
-  function updateFlavoring() {
-    var ratio, totalAmount, syrupToAdd, syrupCombined, sw, ss;
-    alcohol.val(flavoring.val() * 100);
-    ratio = percent.val() / target.val();
-    totalAmount = roundAmount(ratio * alcohol.val());
-    total.val(totalAmount);
-    syrupToAdd = roundAmount(totalAmount - alcohol.val());
-    syrupCombined = syrupToAdd * 1.164;
-    sw = roundAmount(syrupCombined * 0.6135);
-    ss = roundAmount(syrupCombined - sw);
-    syrupWater.text(sw + "ml");
-    syrupSugar.text(ss + "ml");
-  }
-  function update() {
-    var grainAmount, syrupToAdd, syrupCombined, sw, ss;
-    grainAmount = total.val() / (percent.val()/target.val());
-    syrupToAdd = total.val() - grainAmount;
-    alcohol.val(roundAmount(grainAmount));
-    syrupCombined = syrupToAdd * 1.164;
-    sw = roundAmount(syrupCombined * 0.6135);
-    ss = roundAmount(syrupCombined - sw);
-    syrupWater.text(sw + "ml");
-    syrupSugar.text(ss + "ml");
-    flavoring.val(Math.ceil(grainAmount*0.01));
-  }
-  function updateVia(field, value) {
-    update();
-  }
+
   return {
     init: initialize,
-    updateVia: updateVia,
-    updateAlcohol: updateAlcohol,
-    updateFlavoring: updateFlavoring
+    update: update
   }
+  
 })(Zepto);
 
 Zepto(function($){

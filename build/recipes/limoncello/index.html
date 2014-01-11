@@ -21,12 +21,15 @@
           Limoncello
         </h2>
         <p>
-          This recipe is a great starter recipe into the process of making liquors because it's quick and can be extended to include many types of citrus. If you've spent time in Italy (or just know Italians) you'll know there are many recipes for limoncello (like everything else). I originally learned of this recipe from 'Many Beautiful Things', a story/recipe book by the actor Vincent Schiavelli, whose family is from Sicily. It's a great read.
+          This recipe is a great starter recipe into the process of making liquors because it's quick and can be extended to include many types of citrus. If you've spent time in Italy (or just know Italians) you'll know there are many recipes for limoncello (like everything else). I originally learned of this recipe from <a href="http://www.amazon.com/Many-Beautiful-Things-Vincent-Schiavelli-ebook/dp/B003L77WJ6/ref=sr_1_1?ie=UTF8&qid=1389206819&sr=8-1&keywords=many+beautiful+things">'Many Beautiful Things'</a>, a story/recipe book by the actor <a href="http://www.imdb.com/name/nm0001704/">Vincent Schiavelli</a>, whose family is from Sicily. It's a great read.
         </p>
       </section>
       <section class="recipe">
         <p>
-          This recipe will make <input size="5" type="text" value="750" /> ml of limoncello.
+          This recipe will make <input id="total" size="5" type="number" value="750" /> ml of limoncello at <input id="target" size="3" type="number" value="38" /> percent (<span id="proof">76 </span>proof) using grain alcohol at <input id="percent" size="3" type="text" value="95" /> percent.
+        </p>
+        <p>
+          Yield:   <input id="bottleCount" size="4" type="text" value="3" />x<input id="bottleSize" size="5" type="text" value="750" /><span id="bottleLabel">ml container </span> of liquor.
         </p>
         <h2>
           1. Mix
@@ -36,17 +39,17 @@
         </p>
         <ul>
           <li>
-            <input size="5" type="text" value="300" /> ml grain alcohol
+            <input id="alcohol" size="5" type="number" value="300" /> ml grain alcohol (at 95%).
           </li>
           <li>
-            peeled skins from <input size="2" type="text" value="3" /> meyer lemons
+            peeled skins from <input id="flavoring" size="2" type="number" value="3" /> meyer lemons
           </li>
         </ul>
         <h2>
           2. Wait
         </h2>
         <p>
-          <strong>4 </strong>days minimum. The peels turn white eventually which tells you there's no reason to macerate any longer.
+          <strong>4 </strong>days minimum. A few days more is fine.
         </p>
         <h2>
           3. Finish
@@ -58,10 +61,10 @@
             </p>
             <ul>
               <li>
-                <strong>250ml</strong> water
+                <strong><span id="syrupWater">250ml</span></strong> water
               </li>
               <li>
-                <strong>120ml</strong> sugar
+                <strong><span id="syrupSugar">120ml</span></strong> sugar
               </li>
             </ul>
             <p>
@@ -80,5 +83,7 @@
         </ul>
       </section>
     </main>
+    <script src="/assets/js/vendor/zepto.min.js"></script>
+    <script src="/assets/js/recipes.js"></script>
   </body>
 </html>

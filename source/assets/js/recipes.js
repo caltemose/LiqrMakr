@@ -1,7 +1,7 @@
 var liqrmakr = (function($) {
   var total, proof, target, percent, 
       bottleCount, bottleSize, bottleLabel,
-      alcohol, flavoring, 
+      alcohol, flavorings, 
       syrupWater, syrupSugar;
 
   function initialize(options) {
@@ -22,36 +22,56 @@ var liqrmakr = (function($) {
     bottleSize = $('#bottleSize');
     bottleLabel = $('#bottleLabel');
     alcohol = $('#alcohol');
-    flavoring = $('#flavoring');
+    flavorings = $('.flavoring');
     syrupWater = $('#syrupWater');
     syrupSugar = $('#syrupSugar');
   }
 
   function bindInputs() {
-    total.change(function(){ liqrmakr.update('total'); });
-    percent.change(function(){ liqrmakr.update('percent'); });
-    target.change(function(){ liqrmakr.update('target'); });
-    alcohol.change(function(){ liqrmakr.update('alcohol'); })
-    flavoring.change(function(){ liqrmakr.update('flavoring'); })
+    total.change(function(){ liqrmakr.update('total', this); });
+    percent.change(function(){ liqrmakr.update('percent', this); });
+    target.change(function(){ liqrmakr.update('target', this); });
+    alcohol.change(function(){ liqrmakr.update('alcohol', this); })
+    flavorings.each(function(){
+      $(this).change(function(){ liqrmakr.update('flavoring', this); })
+    });
   }
 
-  function update(field) {
+  function update(fieldType, field) {
     var grainAmount, ratio, totalAmount, syrupToAdd, syrupCombined, sw, ss, bottles;
 
-    if (field==="alcohol" || field==="flavoring") {
-      //update flavoring/alcohol values
-      if (field==="alcohol") flavoring.val(Math.ceil(alcohol.val()*0.01));
-      else alcohol.val(flavoring.val() * 100);
+    if (fieldType==="alcohol" || fieldType==="flavoring") {
+      //update alcohol value if needed
+      if (fieldType==="flavoring")
+        alcohol.val($(field).val() / $(field).attr('data-multiplier'));
+      //update flavorings
+      flavorings.each(function(){
+        var field = $(this),
+            fieldRatio = field.attr('data-multiplier');
+        if (field.attr('data-ceiling') === 'false')
+          field.val((alcohol.val()*fieldRatio).toFixed(1));
+        else
+          field.val(Math.ceil(alcohol.val()*fieldRatio));
+      });
       //update total amount
       ratio = percent.val() / target.val();
       totalAmount = roundAmount(ratio * alcohol.val());
       total.val(totalAmount);
+
     } else {
       grainAmount = total.val() / (percent.val()/target.val());
       //update alcohol amount
       alcohol.val(roundAmount(grainAmount));
       //update flavoring
-      flavoring.val(Math.ceil(grainAmount*0.01));
+      flavorings.each(function(){
+        var field = $(this),
+            fieldRatio = field.attr('data-multiplier');
+        if (field.attr('data-ceiling') === 'false')
+          field.val((alcohol.val()*fieldRatio).toFixed(1));
+        else
+          field.val(Math.ceil(alcohol.val()*fieldRatio));
+      });
+
       //update proof
       proof.text(roundAmount(target.val()*2) + " ");
     }
@@ -83,7 +103,7 @@ var liqrmakr = (function($) {
     init: initialize,
     update: update
   }
-  
+
 })(Zepto);
 
 Zepto(function($){

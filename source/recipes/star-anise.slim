@@ -15,7 +15,8 @@ html
 
     main
 
-      h1 LiqrMakr
+      h1
+        a(href="../") LiqrMakr
 
       section.intro
         h2 Star Anise Liquor
@@ -96,3 +97,7 @@ html
 
     script(src="/assets/js/vendor/zepto.min.js")
     script(src="/assets/js/recipes.js")
+    javascript:
+      Zepto(function($){
+        liqrmakr.init({total:750, target: 50});
+      })

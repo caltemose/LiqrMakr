@@ -14,7 +14,7 @@
   <body>
     <main>
       <h1>
-        LiqrMakr
+        <a href="../">LiqrMakr</a>
       </h1>
       <section class="intro">
         <h2>
@@ -80,5 +80,10 @@
     </main>
     <script src="/assets/js/vendor/zepto.min.js"></script>
     <script src="/assets/js/recipes.js"></script>
+    <script type="text/javascript">
+      Zepto(function($){
+        liqrmakr.init({total:750, target: 35, waterToAlc: 1.7333, sugarToAlc: 1.1827, alcWaterMultiplier: 1.0061});
+      })
+    </script>
   </body>
 </html>

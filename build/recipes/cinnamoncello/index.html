@@ -20,7 +20,7 @@
           <meta content="" name="description" />
           <meta content="" name="keywords" />
           <title>
-            LiqrMakr - How to Make Star Anise Liquor
+            LiqrMakr - How to Make Cinnamoncello
           </title>
           <link href="../../assets/css/main.css" media="screen" rel="stylesheet" type="text/css" />
         </head>
@@ -31,15 +31,15 @@
             </h1>
             <section class="intro">
               <h2>
-                Star Anise Liquor
+                Cinnamoncello
               </h2>
               <p>
-                What to say about this recipe...
+                Hot, spicy, woody goodness.
               </p>
             </section>
             <section class="recipe">
               <p>
-                This recipe will make <input id="total" size="5" type="number" value="750" /> ml of liquor at <input id="target" size="3" type="number" value="50" /> percent (<span id="proof">76 </span>proof) using grain alcohol at <input id="percent" size="3" type="text" value="95" /> percent.
+                This recipe will make <input id="total" size="5" type="number" value="750" /> ml of cinnamoncello at <input id="target" size="3" type="number" value="38" /> percent (<span id="proof">76 </span>proof) using grain alcohol at <input id="percent" size="3" type="text" value="95" /> percent.
               </p>
               <p>
                 Yield:   <input id="bottleCount" size="4" type="text" value="3" />x<input id="bottleSize" size="5" type="text" value="750" /><span id="bottleLabel">ml container </span> of liquor.
@@ -55,29 +55,14 @@
                   <input id="alcohol" size="5" type="number" value="300" /> ml grain alcohol (at 95%).
                 </li>
                 <li>
-                  <input class="flavoring" data-multiplier="0.1" name="star-anise" size="3" type="number" value="3" /> grams of star anise.
-                </li>
-                <li>
-                  <input class="flavoring" data-multiplier="0.005" name="coriander-seeds" size="3" type="number" value="3" /> grams of coriander seeds.
-                </li>
-                <li>
-                  <input class="flavoring" data-ceiling="false" data-multiplier="0.0025" name="cinnamon-stick" size="3" type="number" value="1" /> cinnamon sticks.
-                </li>
-                <li>
-                  <input class="flavoring" data-multiplier="0.0075" name="cloves" size="3" type="number" value="3" /> cloves
-                </li>
-                <li>
-                  <input class="flavoring" data-ceiling="false" data-multiplier="0.0025" name="vanilla" size="3" type="number" value="3" /> vanilla pod(s).
-                </li>
-                <li>
-                  the peel of <input class="flavoring" data-ceiling="false" data-multiplier="0.0012" name="orange" size="3" type="number" value="0.5" /> orange(s).
+                  <input class="flavoring" data-ceiling="false" data-multiplier="0.0005" size="2" type="number" value="3" /> LBS of cinnamon sticks
                 </li>
               </ul>
               <h2>
                 2. Wait
               </h2>
               <p>
-                <strong>20 </strong>days minimum. You'll need:
+                <strong>30 </strong>days. A few days more is fine. Make the simple syrup the day before the flavored alcohol is ready to be bottled. You'll need:
               </p>
               <ul>
                 <li>
@@ -95,13 +80,13 @@
               </h2>
               <ul>
                 <li>
-                  Filter the macerated alcohol.
+                  Filter the macerated alcohol. If you just remove the sticks, you'll have a cloudy and very woody cinnamoncello. Filter through a coffee filter to clear up the liquor and remove all the cinnamon stick residue.
                 </li>
                 <li>
                   Add the simple syrup to the macerated alcohol. Do this in a container that will make it easy to pour the result using a funnel into your final bottle.
                 </li>
                 <li>
-                  Bottle the results. Drink immediately or let it sit for a while.
+                  Bottle the results.
                 </li>
               </ul>
             </section>
@@ -110,7 +95,7 @@
           <script src="/assets/js/recipes.js"></script>
           <script type="text/javascript">
             Zepto(function($){
-              liqrmakr.init({total:750, target: 50});
+              liqrmakr.init({total:1875, target: 50, waterToAlc: 1.124, sugarToAlc: 0.71, alcWaterMultiplier: 0.882768});
             })
           </script>
         </body>

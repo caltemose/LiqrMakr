@@ -7,7 +7,7 @@ html
     meta name="description" content=""
     meta name="keywords" content=""
 
-    title LiqrMakr - How to Make Limoncello
+    title LiqrMakr - How to Make Cinnamoncello
 
     == stylesheet_link_tag "main"
 
@@ -19,20 +19,15 @@ html
         a(href="../") LiqrMakr
 
       section.intro
-        h2 Limoncello
+        h2 Cinnamoncello
 
-        p 
-          | This is a great starter recipe for learning the core process of making liquors because it's quick and can be extended to include many types of citrus. If you've spent time in Italy (or just know Italians) you'll know there are many recipes for limoncello (like everything else). I originally learned of this recipe from 
-          a(href="http://www.amazon.com/Many-Beautiful-Things-Vincent-Schiavelli-ebook/dp/B003L77WJ6/ref=sr_1_1?ie=UTF8&qid=1389206819&sr=8-1&keywords=many+beautiful+things") 'Many Beautiful Things'
-          |, a story/recipe book by the actor 
-          a(href="http://www.imdb.com/name/nm0001704/") Vincent Schiavelli
-          |, whose family is from Sicily. It's a great read.
+        p Hot, spicy, woody goodness.
 
       section.recipe
         p 
           | This recipe will make 
           input#total(type="number" size="5" value="750") 
-          |  ml of limoncello at 
+          |  ml of cinnamoncello at 
           input#target(type="number" size="3" value="38") 
           |  percent (
           span#proof 76 
@@ -56,14 +51,13 @@ html
             input#alcohol(type="number" size="5" value="300")  
             |  ml grain alcohol (at 95%).
           li 
-            | peeled skins from 
-            input.flavoring(type="number" size="2" value="3" data-multiplier="0.01") 
-            |  meyer lemons
+            input.flavoring(type="number" size="2" value="3" data-multiplier="0.0005" data-ceiling="false") 
+            |  LBS of cinnamon sticks
 
         h2 2. Wait
         p 
-          strong 4 
-          | days minimum. A few days more is fine. Make the simple syrup the day before the flavored alcohol is ready to be bottled. You'll need:
+          strong 30 
+          | days. A few days more is fine. Make the simple syrup the day before the flavored alcohol is ready to be bottled. You'll need:
 
         ul
           li 
@@ -79,15 +73,15 @@ html
 
         h2 3. Finish
         ul
-          li Filter the macerated alcohol. In this case just remove the peels - filtering through a coffee filter is mostly a waste of time.
+          li Filter the macerated alcohol. If you just remove the sticks, you'll have a cloudy and very woody cinnamoncello. Filter through a coffee filter to clear up the liquor and remove all the cinnamon stick residue.
 
           li Add the simple syrup to the macerated alcohol. Do this in a container that will make it easy to pour the result using a funnel into your final bottle.
 
-          li Bottle the results. The limoncello will mellow out if you let it sit for a few weeks (or longer) but it's ready to enjoy immediately.
+          li Bottle the results.
 
     script(src="/assets/js/vendor/zepto.min.js")
     script(src="/assets/js/recipes.js")
     javascript:
       Zepto(function($){
-        liqrmakr.init({total:750, target: 35, waterToAlc: 1.7333, sugarToAlc: 1.1827, alcWaterMultiplier: 1.0061});
+        liqrmakr.init({total:1875, target: 50, waterToAlc: 1.124, sugarToAlc: 0.71, alcWaterMultiplier: 0.882768});
       })

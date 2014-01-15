@@ -2,15 +2,20 @@ var liqrmakr = (function($) {
   var total, proof, target, percent, 
       bottleCount, bottleSize, bottleLabel,
       alcohol, flavorings, 
-      syrupWater, syrupSugar;
+      syrupWater, syrupSugar, sweetness = 0.6135,
+      waterToAlc, sugarToAlc, alcWaterMultiplier;
 
   function initialize(options) {
     getInputs();
     bindInputs();
-    if (options.total) {
-      total.val(options.total);
-      update('total');
-    }
+    //liqrmakr.init({total:750, target: 38, waterToAlc: 1.73, sugarToAlc: 1.18, alcWaterMultiplier: 1.0061});
+    if (options.total) total.val(options.total);
+    if (options.target) target.val(options.target);
+    if (options.sweetness) sweetness = options.sweetness;
+    if (options.waterToAlc) waterToAlc = options.waterToAlc;
+    if (options.sugarToAlc) sugarToAlc = options.sugarToAlc;
+    if (options.alcWaterMultiplier) alcWaterMultiplier = options.alcWaterMultiplier;
+    update('total', null);
   }
 
   function getInputs() {
@@ -54,13 +59,12 @@ var liqrmakr = (function($) {
           field.val(Math.ceil(alcohol.val()*fieldRatio));
       });
       //update total amount
-      ratio = percent.val() / target.val();
-      totalAmount = roundAmount(ratio * alcohol.val());
-      total.val(totalAmount);
+      sw = alcohol.val() * waterToAlc;
+      total.val(alcWaterMultiplier * (parseInt(alcohol.val()) + sw));
 
     } else {
-      grainAmount = total.val() / (percent.val()/target.val());
       //update alcohol amount
+      grainAmount = target.val()*(total.val()/alcWaterMultiplier) / percent.val();
       alcohol.val(roundAmount(grainAmount));
       //update flavoring
       flavorings.each(function(){
@@ -74,15 +78,13 @@ var liqrmakr = (function($) {
 
       //update proof
       proof.text(roundAmount(target.val()*2) + " ");
+
+      sw = alcohol.val() * waterToAlc;
     }
 
     //update syrup information
-    syrupToAdd = total.val() - alcohol.val();
-    syrupCombined = syrupToAdd * 1.164;
-    sw = roundAmount(syrupCombined * 0.6135);
-    ss = roundAmount(syrupCombined - sw);
-    syrupWater.text(sw + "ml");
-    syrupSugar.text(ss + "ml");
+    syrupWater.text(roundAmount(sw) + "ml");
+    syrupSugar.text(roundAmount(alcohol.val()*sugarToAlc) + "ml");
 
     //update bottle count 
     bottles = total.val()/bottleSize.val();
@@ -106,6 +108,3 @@ var liqrmakr = (function($) {
 
 })(Zepto);
 
-Zepto(function($){
-  liqrmakr.init({total:750});
-})
